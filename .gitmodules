@@ -1,0 +1,3 @@
+[submodule "mods/LEEF-class"]
+	path = mods/LEEF-class
+	url = https://github.com/Luanti-Extended-Engine-Features/LEEF-class
