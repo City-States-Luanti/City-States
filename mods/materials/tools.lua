@@ -19,6 +19,7 @@ crafting.register_tool({
     description = "steel pickaxe",
     wield_image = "default_tool_stonepick.png",
     inventory_image = "default_tool_stonepick.png",
+    wearseconds = 600,
     max_capabilities = {
         groups = {
             barky         = {maxlevel=8,  maxtime=6,   factor=10, wear=1},
