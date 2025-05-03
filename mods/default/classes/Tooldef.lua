@@ -1,51 +1,16 @@
-local Craftdef, Itemdef, Tooldef, Fueldef
 local max_group_difficulty = 20
-
 local default_def = minetest.registered_items[""]
-Itemdef      = leef.class.new({
-    quality_increments     = 4,                --maximum possible quality of the item
-    quality_is_whole       = true,            --wether quality
-    itemdef                = nil,               --engine definition, instantiated in construct_new_class.
-    itemname               = nil, --[["modname:item"]]
-    description            = "",
-    inventory_image        = "",
-    wield_image            = "",
-    construct_new_class    = function(self)
-        self.itemdef = {}
-        if self.itemname then --make sure its a named item and not a template class
-            for _, i in pairs({"inventory_image", "wield_image", "description", "short_description", "wield_scale"}) do
-                self.itemdef[i] = self[i]
-                print(i)
-            end
-        end
-        print("construct1", "defclass", self)
-        print(self.itemname, self.itemdef, Itemdef.itemdef)
-    end,
-    construct = error
-})
---[[local function recursive_find_inheritance(class, i)
-    return class[i] or ((not class.parent_class) and nil) or recursive_find_inheritance(class.parent_class, i)
-end]]
-Craftitemdef = Itemdef:new_class({
-    construct_new_class    = function(self)
-        local coreitemdef = self.itemdef
-        core.register_craftitem(self.itemstring, coreitemdef)
-    end
-})
-
---[[
-================== TOOLS ====================
-
-]]
-Tooldef      = Itemdef:new_class({
+local Itemdef = cs_crafting.Itemdef
+Tooldef       = Itemdef:new_class({
     quality_increments     = 100,
+    itemtype               = "tool",
     quality_is_whole       = false,
     skill                  = nil,
     skill_factor           = 0,
     on_use                 = nil, --func
     update_skill_stats     = nil, --func
     construct_new_class    = function(self)
-        print("construct2", "defclass", self)
+
         local old_on_use = self.itemdef.on_use
         --[[function self.itemdef.on_use(...)
             self:on_use(...)
@@ -80,8 +45,6 @@ Tooldef      = Itemdef:new_class({
         end
         tool_cape.full_punch_interval = 1.2
         tool_cape.max_drop_level=0
-
-        print(dump(self.itemdef))
         minetest.register_tool(self.itemname, self.itemdef)
     end
 })
@@ -116,6 +79,4 @@ end
 function Tooldef:update_skill_stats(meta)
 end
 
-crafting.Craftdef, crafting.Itemdef, crafting.Tooldef, crafting.Fueldef = Craftdef, Itemdef, Tooldef, Fueldef
-
-print("test", math.log(2))
+cs_crafting.Tooldef = Tooldef

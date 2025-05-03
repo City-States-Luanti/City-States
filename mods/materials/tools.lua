@@ -1,5 +1,5 @@
 
-crafting.register_tool({
+cs_crafting.register_tool({
     itemname = "cs_materials:steel_axe",
     description = "steel axe",
     wield_image = "default_tool_stoneaxe.png",
@@ -14,7 +14,7 @@ crafting.register_tool({
     }
 })
 
-crafting.register_tool({
+cs_crafting.register_tool({
     itemname = "cs_materials:steel_pickaxe",
     description = "steel pickaxe",
     wield_image = "default_tool_stonepick.png",
@@ -28,6 +28,15 @@ crafting.register_tool({
         }
     }
 })
+cs_crafting.register_tool({
+    itemname = "cs_materials:redumentary_lighter",
+    description = "primitive lighter",
+    wield_image = "default_tool_stonepick.png",
+    inventory_image = "default_tool_stonepick.png",
+    wearseconds = 600,
+    max_capabilities = {},
+})
+
 
 --[[
     structureless
